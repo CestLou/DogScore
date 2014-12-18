@@ -1,8 +1,11 @@
-h1 {
-	color:#ddd888;
+h1, h3 {
+	color:#fff;
 }
-
-footer {
-	width: 1000px;
-	height: 200px;
+/*.containerforabout {
+    width: 20px;
+    height:10px;
+}*/
+img {
+	width: 80%;
+	height: auto;
 }

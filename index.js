@@ -24,29 +24,36 @@ app.use(bodyParser.urlencoded({extended:false}))
 // var db = require('./models')
 
 
+// app.get('/', function(req, res) {
+// 	res.render('index', {allYelpResults:{
+// 		results:{
+// 			region:{
+// 				center:{
+// 					latitude:null,
+// 					longitude:null
+// 					}
+// 				}
+// 			}
+// 		}
+// 	})
+// });
+
+
+
+
 app.get('/', function(req, res) {
-	res.render('index')
-});
-
-
-
-
-app.get('/search', function(req, res) {
 	var allYelpResults = []
 	// var searchTerms = ['hotels', 'vet']
 	var searchTerms = (req.query.searchParams && req.query.searchParams.constructor === String ) ?  new Array(req.query.searchParams) : req.query.searchParams;
+	searchTerms = searchTerms || ['dog_parks']
 	// var searchTerms = req.query.searchParams;
-	console.log(Array.isArray(searchTerms))
+	// console.log(Array.isArray(searchTerms))
+
 	async.each(searchTerms, function(searchTerm, callback) {
 		//Do this for each searchTerm
-		// console.log("this searchTerm", searchTerm)
 		yelp.search({term:"dog friendly", category_filter: searchTerm, location: "Seattle, WA"}, function(err,data) {
-			// take each yelp result and add it a bigger array
-			// console.log(data.businesses)
 			allYelpResults.push(data)
 			callback(err);
-			// console.log('success')
-			// console.log(data)
 		});
 	},function(err) {
 		// console.log(allYelpResults.length);
@@ -58,8 +65,8 @@ app.get('/search', function(req, res) {
 			results.total += allYelpResults[i].total;
 			results.businesses = results.businesses.concat(allYelpResults[i].businesses)
 		}
-		res.render('search', {allYelpResults: {results:results} })
-		// res.send('search', {allYelpResults:allYelpResults[0]})
+		res.render('index', {allYelpResults: {results:results} })
+		// res.render('search', {allYelpResults:allYelpResults[0]})
 	})
 })
 		

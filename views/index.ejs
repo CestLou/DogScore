@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,6 +19,11 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- My CSS Override  -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Leaflet API  -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,15 +31,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
 
     <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-paw"></i></a>
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-angle-double-right"></i></a>
             <li class="sidebar-brand">
                 <a href="#top">DogScore</a>
             </li>
@@ -46,11 +49,11 @@
                 <a href="#about">About</a>
             </li>
             <li>
-                <a href="#services">Specific Searches</a>
+                <a href="#call-to-action">Specific Searches</a>
             </li>
-           <!--  <li>
-                <a href="#portfolio">Portfolio</a>
-            </li> -->
+            <li>
+                <a href="#map">Map</a>
+            </li>
             <li>
                 <a href="#contact">Contact</a>
             </li>
@@ -63,23 +66,14 @@
             <h1>DogScore</h1>
             <h3>Find dog friendly parks and more, in your area.</h3>
             <br>
-            <a href="#search" class="btn btn-dark btn-lg">Start Your Search</a>
+            <a href="#map" class="btn btn-dark btn-lg">Start Your Search</a>
         </div>
     </header>
 
     <!-- About -->
     <section id="about" class="about">
     <% include about %>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-                    <p class="lead">This theme features some wonderful photography courtesy of <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a>.</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
+      
     </section>
 
     <!-- Services -->
@@ -156,37 +150,51 @@
     <!-- Callout -->
     <aside class="callout">
         <div class="text-vertical-center">
-            <h1>Vertically Centered Text</h1>
+            <h1>Run Fast, Nap, Bark.</h1>
         </div>
     </aside>
 
     
 
     <!-- Call to Action -->
-    <aside class="call-to-action bg-primary">
+    <aside class="call-to-action bg-primary" id='call-to-action'>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>The buttons below are impossible to resist.</h3>
+                    <h3>Search Refinements Go Here</h3>
                     <a href="#" class="btn btn-lg btn-light">Click Me!</a>
                     <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
                 </div>
             </div>
         </div>
-    </aside>
+    </aside>  
 
     <!-- Map -->
-    <section id="search" class="map">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-        <br />
-        <small>
-            <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-        </small>
-        </iframe>
+    <section>
+        <div style="height:500px;" id="map"></div>
+        <script>
+            var businessData= <%- JSON.stringify(allYelpResults.results.businesses) %>;
+            // console.log(businessData);
+            var latitude= <%= allYelpResults.results.region.center.latitude %>;
+            var longitude= <%= allYelpResults.results.region.center.longitude %>;
+            var map = L.map('map').setView([latitude, longitude], 13);
+            L.tileLayer('http://{s}.tiles.mapbox.com/v3/cestlou.kfelc2a3/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18
+            }).addTo(map);
+            
+            for (var i=0; i < businessData.length; i++) {
+                // console.log(businessData[i]);
+                var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
+                L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
+            }
+
+        </script>
+
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer id='contact'>
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
@@ -200,7 +208,7 @@
                     <br>
                     <ul class="list-inline">
                         <li>
-                            <a href="http://www.LinkedIn.com/In/CestLou"><i class="fa fa-linkedin fa-fw fa-3x"></i></a>
+                            <a href="http://linkedin.com/in/cestlou"><i class="fa fa-linkedin fa-fw fa-3x"></i></a>
                         </li>
                         <li>
                             <a href="http://github.com/CestLou"><i class="fa fa-github-square fa-fw fa-3x"></i></a>
