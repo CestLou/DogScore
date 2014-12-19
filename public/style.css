@@ -6,6 +6,18 @@ h1, h3 {
     height:10px;
 }*/
 img {
-	width: 80%;
-	height: auto;
+	width: 50%;
+	height: 50%;
+}
+footer {
+padding: 80px 0;
+}
+#map { 
+	height: 500px; 
+}
+.call-to-action .btn {
+margin: 0px;
+}
+input {
+	text-align:center;
 }

@@ -40,7 +40,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 
 
-
 app.get('/', function(req, res) {
 	var allYelpResults = []
 	// var searchTerms = ['hotels', 'vet']
@@ -51,7 +50,14 @@ app.get('/', function(req, res) {
 
 	async.each(searchTerms, function(searchTerm, callback) {
 		//Do this for each searchTerm
-		yelp.search({term:"dog friendly", category_filter: searchTerm, location: "Seattle, WA"}, function(err,data) {
+		var location = "";
+		if (req.query.location === undefined) {
+			location = "Seattle, WA";
+		} else {
+			location = req.query.location;
+			console.log("LOCATION IS: ",location)
+		}
+		yelp.search({term:"dog friendly", category_filter: searchTerm, location: location}, function(err,data) {
 			allYelpResults.push(data)
 			callback(err);
 		});
@@ -65,7 +71,13 @@ app.get('/', function(req, res) {
 			results.total += allYelpResults[i].total;
 			results.businesses = results.businesses.concat(allYelpResults[i].businesses)
 		}
-		res.render('index', {allYelpResults: {results:results} })
+		console.log(results)
+		if(req.query.json && req.query.json=='true'){
+			res.send({results:results});
+		}else{
+			res.render('index', {allYelpResults: {results:results} })	
+		}
+		
 		// res.render('search', {allYelpResults:allYelpResults[0]})
 	})
 })
@@ -74,9 +86,20 @@ app.get('/about', function(req, res) {
 	res.render('about')
 })
 
+app.get('/search', function(req, res) {
+	console.log(req.query);
+	res.send('hello')
+	// search yelp again
+	// probably refactor search into a function so it can be called from multiple places
+	// return the results to the ajax call, to be populated into the html
+})
 
 
 
 
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000, function() {
+  console.log("listening on 3000");
+});
+
+
