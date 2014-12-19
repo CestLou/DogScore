@@ -54,7 +54,7 @@ app.get('/', function(req, res) {
 			location = "Seattle, WA";
 		} else {
 			location = req.query.location;
-			console.log("LOCATION IS: ",location)
+			// console.log("LOCATION IS: ",location)
 		}
 		yelp.search({term:"dog friendly", category_filter: searchTerm, location: location}, function(err,data) {
 			allYelpResults.push(data)
@@ -70,7 +70,7 @@ app.get('/', function(req, res) {
 			results.total += allYelpResults[i].total;
 			results.businesses = results.businesses.concat(allYelpResults[i].businesses)
 		}
-		console.log(results)
+		// console.log(results)
 		if(req.query.json && req.query.json=='true'){
 			res.send({results:results});
 		}else{
@@ -86,7 +86,7 @@ app.get('/about', function(req, res) {
 })
 
 app.get('/search', function(req, res) {
-	console.log(req.query);
+	// console.log(req.query);
 	res.send('hello')
 	// search yelp again
 	// probably refactor search into a function so it can be called from multiple places
