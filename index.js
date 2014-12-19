@@ -10,7 +10,6 @@ var yelp = require("yelp").createClient({
   token_secret: "Kmi79-x8Ldc36uAwNM8SOnEuFm8"
 });
 var async = require('async');
-var _ = require('lodash');
 
 // var google_geocoding = require('google-geocoding');
 
