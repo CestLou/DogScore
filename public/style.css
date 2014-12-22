@@ -1,23 +1,20 @@
 h1, h3 {
 	color:#fff;
 }
-/*.containerforabout {
-    width: 20px;
-    height:10px;
-}*/
+
 img {
 	width: 50%;
 	height: 50%;
 }
+
 footer {
 padding: 80px 0;
 }
-#map { 
-	height: 500px; 
-}
+
 .call-to-action .btn {
 margin: 0px;
 }
+
 input {
 	text-align:center;
 }

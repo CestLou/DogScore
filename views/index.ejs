@@ -155,6 +155,7 @@
  -->
 
     <!-- Call to Action -->
+    <!-- Make an onclick jQuery telling the browser to add and remove classes -->
     <aside class="call-to-action bg-primary" id='call-to-action'>
         <div class="container">
             <div class="row">
@@ -227,19 +228,21 @@
             })
         </script>
 
-        <div style="height:500px;" id="map"></div>
+        <div style="height:500px;" id="map" class="dark"></div>
         <script>
             // var searchLoop = function() {
                 var businessData= <%- JSON.stringify(allYelpResults.results.businesses) %>;
                 // console.log(businessData);
                 var latitude= <%= allYelpResults.results.region.center.latitude %>;
                 var longitude= <%= allYelpResults.results.region.center.longitude %>;
-                var map = L.map('map').setView([latitude, longitude], 13);
+                var map = L.map('map', {
+                    // zoomControl: false
+                }).setView([latitude, longitude], 13);
                 L.tileLayer('http://{s}.tiles.mapbox.com/v3/cestlou.kfelc2a3/{z}/{x}/{y}.png', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18
                 }).addTo(map);
-                
+                map.scrollWheelZoom.disable();                  
                 for (var i=0; i < businessData.length; i++) {
                     // console.log(businessData[i]);
                     var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
