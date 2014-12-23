@@ -19,22 +19,16 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-    <!-- My CSS Override  -->
-    <link rel="stylesheet" type="text/css" href="/style.css">
 
     <!-- jQuery -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- Leaflet API  -->
-    <link rel="stylesheet" href="leaflet-0.7.3/leaflet.css" />
-    <script src="leaflet-0.7.3/leaflet.js"></script>
+    <link rel="stylesheet" href="/leaflet-0.7.3/leaflet.css" />
+    <script src="/leaflet-0.7.3/leaflet.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- My CSS Override  -->
+    <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
 
@@ -49,9 +43,6 @@
             <li>
                 <a href="#top">Home</a>
             </li>
-            <!-- <li>
-                <a href="#about">About</a>
-            </li> -->
             <li>
                 <a href="#call-to-action">Specific Searches</a>
             </li>
@@ -192,7 +183,7 @@
 
     <!-- Map -->
     <section>
-        
+
         <script> 
             $(function() {
                 $('#searchForm').on('submit', function(event) {
@@ -217,26 +208,17 @@
                         } 
 
                         map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
-
-                            // replace the contents of the map when the ajax call finishes
-                            // possibly refactor map rendering into a function that can be called from
-                            // multiple places
-                            //  put return results into the html  >> $('#someTagID').html(results)
-
-                        });
+                    });
                 })
             })
         </script>
 
         <div style="height:500px;" id="map" class="dark"></div>
         <script>
-            // var searchLoop = function() {
                 var businessData= <%- JSON.stringify(allYelpResults.results.businesses) %>;
-                // console.log(businessData);
                 var latitude= <%= allYelpResults.results.region.center.latitude %>;
                 var longitude= <%= allYelpResults.results.region.center.longitude %>;
                 var map = L.map('map', {
-                    // zoomControl: false
                 }).setView([latitude, longitude], 13);
                 L.tileLayer('http://{s}.tiles.mapbox.com/v3/cestlou.kfelc2a3/{z}/{x}/{y}.png', {
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -244,17 +226,11 @@
                 }).addTo(map);
                 map.scrollWheelZoom.disable();                  
                 for (var i=0; i < businessData.length; i++) {
-                    // console.log(businessData[i]);
                     var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
                     L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
                 }
-            // }
-
         </script>
-
     </section>
-
-  <!--  -->
 
     <!-- Footer -->
     <footer id='contact'>
