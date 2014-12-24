@@ -19,5 +19,6 @@ input {
 	text-align:center;
 }
 .bg-primary {
-	background-color: #348637;
+	background-color: #767F72;
+	border: 5px solid black;
 }

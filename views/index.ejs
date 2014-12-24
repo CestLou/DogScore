@@ -185,50 +185,50 @@
     <section>
 
          <script> 
-        //     $(function() {
-        //         $('#searchForm').on('submit', function(event) {
-        //             event.preventDefault();
-        //             var formData = $(this).serialize();
-        //             $.ajax({
-        //                 type: 'GET',
-        //                 url: '/?json=true',
-        //                 data: formData
-        //             }).done(function(response) {
-        //                 // $('#map').empty();
-        //                 var businessData = response.results.businesses;
-        //                 console.log("THE SEARCH RESULT ARE: ",businessData);
+            $(function() {
+                $('#searchForm').on('submit', function(event) {
+                    event.preventDefault();
+                    var formData = $(this).serialize();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/?json=true',
+                        data: formData
+                    }).done(function(response) {
+                        // $('#map').empty();
+                        var businessData = response.results.businesses;
+                        console.log("THE SEARCH RESULT ARE: ",businessData);
 
 
-        //                 console.log(businessData)
+                        console.log(businessData)
                         
-        //                 for (var i=0; i < businessData.length; i++) {
-        //                     // console.log(businessData[i]);
-        //                     var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
-        //                     L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
-        //                 } 
+                        for (var i=0; i < businessData.length; i++) {
+                            // console.log(businessData[i]);
+                            var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
+                            L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
+                        } 
 
-        //                 map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
-        //             });
-        //         })
-        //     })
+                        map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
+                    });
+                })
+            })
         // </script>
 
         <div style="height:500px;" id="map" class="dark"></div>
         <script>
-                // var businessData= <%- JSON.stringify(allYelpResults.results.businesses) %>;
-                // var latitude= <%= allYelpResults.results.region.center.latitude %>;
-                // var longitude= <%= allYelpResults.results.region.center.longitude %>;
-                // var map = L.map('map', {
-                // }).setView([latitude, longitude], 13);
-                // L.tileLayer('http://{s}.tiles.mapbox.com/v3/cestlou.kfelc2a3/{z}/{x}/{y}.png', {
-                //     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                //     maxZoom: 18
-                // }).addTo(map);
-                // map.scrollWheelZoom.disable();                  
-                // for (var i=0; i < businessData.length; i++) {
-                //     var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
-                //     L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
-                // }
+                var businessData= <%- JSON.stringify(allYelpResults.results.businesses) %>;
+                var latitude= <%= allYelpResults.results.region.center.latitude %>;
+                var longitude= <%= allYelpResults.results.region.center.longitude %>;
+                var map = L.map('map', {
+                }).setView([latitude, longitude], 13);
+                L.tileLayer('http://{s}.tiles.mapbox.com/v3/cestlou.kfelc2a3/{z}/{x}/{y}.png', {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18
+                }).addTo(map);
+                map.scrollWheelZoom.disable();                  
+                for (var i=0; i < businessData.length; i++) {
+                    var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
+                    L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
+                }
         </script>
     </section>
 

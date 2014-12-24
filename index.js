@@ -3,14 +3,16 @@ var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
 //all keys need to have a link to the ignored env file. as to not be included in github push!
+require('./db')
 var yelp = require("yelp").createClient({
-	consumer_key: process.env.woof_key,
-  	consumer_secret: process.env.woof_secret,
-  	token: process.env.woof_token,
-  	token_secret: process.env.woof_token_secret});
-var async = require('async');
+	consumer_key: process.env.WOOF_KEY,
+  	consumer_secret: process.env.WOOF_SECRET,
+  	token: process.env.WOOF_TOKEN,
+  	token_secret: process.env.WOOF_TOKEN_SECRET});
 
+var async = require('async');
 app.set('view engine', 'ejs');
+app.set('port', (process.env.PORT || 3000))
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:false}))
 
@@ -49,9 +51,6 @@ app.get('/', function(req, res) {
 })
 		
 
-
-
-
-app.listen(process.env.PORT || 3000, function() {
-  console.log("I'm listening...");
-});
+app.listen(app.get('port' || 3000), function() {
+  console.log("Node app is running at localhost:" + app.get('port'))
+})
