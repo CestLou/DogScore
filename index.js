@@ -18,13 +18,20 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 
 // Where the search occurs
-app.get('/', function(req, res) {
+app.get('/', function(req, res) { 
 	var allYelpResults = []
 	var searchTerms = (req.query.searchParams && req.query.searchParams.constructor === String ) ?  new Array(req.query.searchParams) : req.query.searchParams;
 	searchTerms = searchTerms || ['dog_parks']
 
 	async.each(searchTerms, function(searchTerm, callback) {
 		//Do this for each searchTerm
+		var phone = "";
+		if (req.query.phone === undefined) {
+		    //return "NO NUM";
+		    phone = 'No Telephone Listed'
+		}
+		else {phone = req.query.phone};
+		
 		var location = "";
 		if (req.query.location === undefined) {
 			location = "Seattle, WA";
@@ -35,7 +42,7 @@ app.get('/', function(req, res) {
 			allYelpResults.push(data)
 			callback(err);
 		});
-	},function(err) {
+	}, function(err) {
 		var results = {total:0, businesses:[], region:{}};
 		for (var i=0; i < allYelpResults.length; i++) {
 			results.region = allYelpResults[i].region
@@ -44,7 +51,7 @@ app.get('/', function(req, res) {
 		}
 		if(req.query.json && req.query.json=='true'){
 			res.send({results:results});
-		}else{
+		} else {
 			res.render('index', {allYelpResults: {results:results} })	
 		}		
 	})

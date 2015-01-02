@@ -21,7 +21,7 @@
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- jQuery -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <!-- Leaflet API  -->
     <link rel="stylesheet" href="/leaflet-0.7.3/leaflet.css" />
@@ -29,6 +29,9 @@
 
     <!-- My CSS Override  -->
     <link rel="stylesheet" type="text/css" href="/style.css">
+
+    <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -38,7 +41,7 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-angle-double-right"></i></a>
             <li class="sidebar-brand">
-                <a href="#top">DogScore</a>
+                <a href="#top" font="bold">DogScore</a>
             </li>
             <li>
                 <a href="#top">Home</a>
@@ -147,6 +150,24 @@
 
     <!-- Call to Action -->
     <!-- Make an onclick jQuery telling the browser to add and remove classes -->
+    <!-- jQuery command for buttons -->
+    <script>
+        $(document).ready(function () {
+            $('#thereCanOnlyBeOne').click(function (event) {
+                if ($(this).prop('checked') === false) {
+                    alert('stuff isnt clicked')
+                }
+            })
+
+            // add event listener to all other boxes
+            // on click, remove class active from Everything label
+            // and remove attr checked from Everything input
+
+            // add event listener to Everything button
+            // on click remove active class from all other labels
+            // remove checked attr from all other inputs
+        })
+    </script>
     <aside class="call-to-action bg-primary" id='call-to-action'>
         <div class="container">
             <div class="row">
@@ -155,18 +176,18 @@
                <form class="navbar-form" id='searchForm'>      
                     <div align='center' class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default active" style='center'>
-                        <input name='searchParams' value='parks,hotels,petstore,vet' type="checkbox" checked> Everything
+                        <input name='searchParams' value='parks,hotels,petstore,vet' type="checkbox" id='thereCanOnlyBeOne' checked> Everything
                         </label>
-                        <label class="btn btn-default">
-                        <input name='searchParams' value='hotels' type="checkbox"> Hotels
+                        <label class="btn btn-default selectAll allButTheFirst">
+                        <input name='searchParams' value='hotels' type="checkbox" id='thereCanOnlyBeTwo'> Hotels
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-default selectAll allButTheFirst">
                         <input name='searchParams' value='petstore' type="checkbox"> Pet Stores
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-default selectAll allButTheFirst">
                         <input name='searchParams' value='dog_parks,parks' type="checkbox"> Parks
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-default selectAll allButTheFirst">
                         <input name='searchParams' value='vet' type="checkbox"> Vets
                       </label>
                     </div>
@@ -196,22 +217,19 @@
                     }).done(function(response) {
                         // $('#map').empty();
                         var businessData = response.results.businesses;
-                        console.log("THE SEARCH RESULT ARE: ",businessData);
-
-
-                        console.log(businessData)
                         
                         for (var i=0; i < businessData.length; i++) {
                             // console.log(businessData[i]);
                             var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
                             L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
                         } 
+                        
 
                         map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
                     });
                 })
             })
-        // </script>
+        </script>
 
         <div style="height:500px;" id="map" class="dark"></div>
         <script>
@@ -226,8 +244,14 @@
                 }).addTo(map);
                 map.scrollWheelZoom.disable();                  
                 for (var i=0; i < businessData.length; i++) {
+                    if (!businessData[i].phone) {
+                        console.log(businessData[i].phone);
+                        businessData[i].phone = 'Phone Number Unavailable!'
+                    };
+                    // console.log(typeof businessData[i].phone);
+
                     var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
-                    L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
+                    L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup('Name: ' + businessData[i].name + '<br>' + 'Telephone: ' +businessData[i].phone  + '<br>' + 'Yelp Page: ' + imgLink + '<br>' + businessData[i].snippet_text);
                 }
         </script>
     </section>
@@ -238,7 +262,7 @@
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
                     <h4><strong>Alison "Luna" Alvarez</strong></h4>
-                    <p>Seattle, WA 98109</p>
+                    <p>Seattle, WA</p>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">alisonrebeccarobb@gmail.com</a>
                         </li>
