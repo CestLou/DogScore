@@ -31,7 +31,7 @@ app.get('/', function(req, res) {
 		    phone = 'No Telephone Listed'
 		}
 		else {phone = req.query.phone};
-		
+
 		var location = "";
 		if (req.query.location === undefined) {
 			location = "Seattle, WA";

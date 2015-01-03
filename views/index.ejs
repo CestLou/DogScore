@@ -153,12 +153,12 @@
     <!-- jQuery command for buttons -->
     <script>
         $(document).ready(function () {
-            $('#thereCanOnlyBeOne').click(function (event) {
-                if ($(this).prop('checked') === false) {
-                    alert('stuff isnt clicked')
-                }
-            })
-
+            $('.allButTheFirst').bind('change', function () {
+               if ($(this).is(':checked'))
+                 console.log('stuff is clicked')
+               else
+                 console.log('stuff isnt clicked')
+            });
             // add event listener to all other boxes
             // on click, remove class active from Everything label
             // and remove attr checked from Everything input
@@ -178,17 +178,17 @@
                         <label class="btn btn-default active" style='center'>
                         <input name='searchParams' value='parks,hotels,petstore,vet' type="checkbox" id='thereCanOnlyBeOne' checked> Everything
                         </label>
-                        <label class="btn btn-default selectAll allButTheFirst">
-                        <input name='searchParams' value='hotels' type="checkbox" id='thereCanOnlyBeTwo'> Hotels
+                        <label class="btn btn-default">
+                        <input name='searchParams' value='hotels' type="checkbox" class='allButTheFirst'> Hotels
                         </label>
-                        <label class="btn btn-default selectAll allButTheFirst">
-                        <input name='searchParams' value='petstore' type="checkbox"> Pet Stores
+                        <label class="btn btn-default">
+                        <input name='searchParams' value='petstore' type="checkbox" class='allButTheFirst'> Pet Stores
                         </label>
-                        <label class="btn btn-default selectAll allButTheFirst">
-                        <input name='searchParams' value='dog_parks,parks' type="checkbox"> Parks
+                        <label class="btn btn-default">
+                        <input name='searchParams' value='dog_parks,parks' type="checkbox" class='allButTheFirst'> Parks
                         </label>
-                        <label class="btn btn-default selectAll allButTheFirst">
-                        <input name='searchParams' value='vet' type="checkbox"> Vets
+                        <label class="btn btn-default">
+                        <input name='searchParams' value='vet' type="checkbox" class='allButTheFirst'> Vets
                       </label>
                     </div>
                     </div>
