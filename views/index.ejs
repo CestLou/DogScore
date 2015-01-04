@@ -69,112 +69,21 @@
     </header>
 
 
-    <!-- Services -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-   <!--  <section id="services" class="services bg-primary">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Our Services</h2>
-                    <hr class="small">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-compass fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>Service Name</strong>
-                                </h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <a href="#" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!/.row (nested) -->
-                <!-- </div> -->
-                <!-- /.col-lg-10 -->
-            <!-- </div> -->
-            <!-- /.row -->
-        <!-- </div> -->
-        <!-- /.container -->
-    <!-- </section>  -->
-
-    <!-- Callout -->
-  <!--   <aside class="callout">
-        <div class="text-vertical-center">
-            <h1>Run, Nap, Bark.</h1>
-        </div>
-    </aside>
- -->
-
-    <!-- Call to Action -->
-    <!-- Make an onclick jQuery telling the browser to add and remove classes -->
-    <!-- jQuery command for buttons -->
+    <!-- jQuery command for buttons toggling classes -->
     <script>
         $(document).ready(function () {
             $('.allButTheFirst').on('change', function () {
                if ($(this).is(':checked')) 
-                 $('#thereCanOnlyBeOne').closest('label').removeClass('active');
-                 //$(this).parent().removeClass('active');
-               else
-                 console.log('stuff isnt clicked')
-            });
-            $('#thereCanOnlyBeOne').bind('change', function () {
-               if ($(this).is(':checked'))
-                 console.log('stuff is clicked')
-               else
-                 console.log('stuff isnt clicked')
-            });
-            // add event listener to all other boxes
-            // on click, remove class active from Everything label
-            // and remove attr checked from Everything input
 
-            // add event listener to Everything button
-            // on click remove active class from all other labels
-            // remove checked attr from all other inputs
+                 $('#thereCanOnlyBeOne').closest('label').removeClass('active');
+            });
+            $('#thereCanOnlyBeOne').on('change', function () {
+               if ($(this).is(':checked'))
+                 $('.allButTheFirst').closest('label').removeClass('active');
+            });
         })
     </script>
+    <!-- Checkboxes/Buttons for search -->
     <aside class="call-to-action bg-primary" id='call-to-action'>
         <div class="container">
             <div class="row">
@@ -182,19 +91,19 @@
                 <h3>Refine Your Search</h3>
                <form class="navbar-form" id='searchForm'>      
                     <div align='center' class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default active" style='center'>
+                        <label class="btn btn-success active" style='center'>
                         <input name='searchParams' value='parks,hotels,petstore,vet' type="checkbox" id='thereCanOnlyBeOne' checked> Everything
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-success">
                         <input name='searchParams' value='hotels' type="checkbox" class='allButTheFirst'> Hotels
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-success">
                         <input name='searchParams' value='petstore' type="checkbox" class='allButTheFirst'> Pet Stores
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-success">
                         <input name='searchParams' value='dog_parks,parks' type="checkbox" class='allButTheFirst'> Parks
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-success">
                         <input name='searchParams' value='vet' type="checkbox" class='allButTheFirst'> Vets
                       </label>
                     </div>
@@ -202,7 +111,7 @@
                     <div class="form-group text-center col-lg-12">
                         <input name='location' type="text" class="form-control" placeholder="Search an Address" required>
                         <br />
-                        <button type="submit" class="btn btn-lg btn-light" id='checkBtn'>WOOF!</button>
+                        <button type="submit" class="btn btn-lg btn-dark" id='checkBtn'>WOOF!</button>
                     </div>
             </form>
             </div>  
@@ -213,29 +122,7 @@
     <section>
 
          <script> 
-            $(function() {
-                $('#searchForm').on('submit', function(event) {
-                    event.preventDefault();
-                    var formData = $(this).serialize();
-                    $.ajax({
-                        type: 'GET',
-                        url: '/?json=true',
-                        data: formData
-                    }).done(function(response) {
-                        // $('#map').empty();
-                        var businessData = response.results.businesses;
-                        
-                        for (var i=0; i < businessData.length; i++) {
-                            // console.log(businessData[i]);
-                            var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
-                            L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
-                        } 
-                        
 
-                        map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
-                    });
-                })
-            })
         </script>
 
         <div style="height:500px;" id="map" class="dark"></div>
@@ -249,17 +136,42 @@
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18
                 }).addTo(map);
-                map.scrollWheelZoom.disable();                  
-                for (var i=0; i < businessData.length; i++) {
-                    if (!businessData[i].phone) {
-                        console.log(businessData[i].phone);
-                        businessData[i].phone = 'Phone Number Unavailable!'
-                    };
+                map.scrollWheelZoom.disable(); 
+                $(function() {
+                    $('#searchForm').on('submit', function(event) {
+                        event.preventDefault();
+                        var formData = $(this).serialize();
+                        $.ajax({
+                            type: 'GET',
+                            url: '/?json=true',
+                            data: formData
+                        }).done(function(response) {
+                            // $('#map').empty();
+                            var businessData = response.results.businesses;
+                            
+                            for (var i=0; i < businessData.length; i++) {
+                                if (!businessData[i].phone) {
+                                    console.log(businessData[i].phone);
+                                    businessData[i].phone = 'Phone Number Unavailable!' } else 
+                                    {businessData[i].phone = businessData[i].phone}
+                                // console.log(businessData[i]);
+                                var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
+                                L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
+                            } 
+                            map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
+                        });
+                    })
+                })                 
+                // for (var i=0; i < businessData.length; i++) {
+                //     if (!businessData[i].phone) {
+                //         console.log(businessData[i].phone);
+                //         businessData[i].phone = 'Phone Number Unavailable!'
+                //     };
                     // console.log(typeof businessData[i].phone);
 
-                    var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
-                    L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup('Name: ' + businessData[i].name + '<br>' + 'Telephone: ' +businessData[i].phone  + '<br>' + 'Yelp Page: ' + imgLink + '<br>' + businessData[i].snippet_text);
-                }
+                    // var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
+                    // L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup('Name: ' + businessData[i].name + '<br>' + 'Telephone: ' +businessData[i].phone  + '<br>' + 'Yelp Page: ' + imgLink + '<br>' + businessData[i].snippet_text);
+                // }
         </script>
     </section>
 

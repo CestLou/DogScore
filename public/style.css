@@ -25,3 +25,59 @@ input {
 body {
 	font-family: 'Quicksand', sans-serif;
 }
+.forStyle {
+	-moz-box-shadow: 2px 1px 11px 1px #858185;
+	-webkit-box-shadow: 2px 1px 11px 1px #858185;
+	box-shadow: 2px 1px 11px 1px #858185;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #362e36), color-stop(1, #878f87) );
+	background:-moz-linear-gradient( center top, #362e36 5%, #878f87 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#362e36', endColorstr='#878f87');
+	background-color:#362e36;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0px;
+	border:1px solid #380b38;
+	display:inline-block;
+	color:#dbd4db;
+	font-size:19px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:30px;
+	width:122px;
+	text-decoration:none;
+	text-align:center;
+}
+.forStyle:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #878f87), color-stop(1, #362e36) );
+	background:-moz-linear-gradient( center top, #878f87 5%, #362e36 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#878f87', endColorstr='#362e36');
+	background-color:#878f87;
+}.forStyle:active {
+	position:relative;
+	top:1px;
+};
+
+.isChecked{
+    color: #fff;
+    background-color: rgba(0,0,0,0.7);
+}
+
+
+
+
+
+
+
+
+
