@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
-//all keys need to have a link to the ignored env file. as to not be included in github push!
 require('./db')
 var yelp = require("yelp").createClient({
 	consumer_key: process.env.WOOF_KEY,
@@ -25,13 +24,6 @@ app.get('/', function(req, res) {
 
 	async.each(searchTerms, function(searchTerm, callback) {
 		//Do this for each searchTerm
-		var phone = "";
-		if (req.query.phone === undefined) {
-		    //return "NO NUM";
-		    phone = 'No Telephone Listed'
-		}
-		else {phone = req.query.phone};
-
 		var location = "";
 		if (req.query.location === undefined) {
 			location = "Seattle, WA";
@@ -57,7 +49,7 @@ app.get('/', function(req, res) {
 	})
 })
 		
-
+//listening....
 app.listen(app.get('port' || 3000), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
 })
