@@ -153,7 +153,14 @@
     <!-- jQuery command for buttons -->
     <script>
         $(document).ready(function () {
-            $('.allButTheFirst').bind('change', function () {
+            $('.allButTheFirst').on('change', function () {
+               if ($(this).is(':checked')) 
+                 $('#thereCanOnlyBeOne').closest('label').removeClass('active');
+                 //$(this).parent().removeClass('active');
+               else
+                 console.log('stuff isnt clicked')
+            });
+            $('#thereCanOnlyBeOne').bind('change', function () {
                if ($(this).is(':checked'))
                  console.log('stuff is clicked')
                else
