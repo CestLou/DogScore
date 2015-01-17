@@ -73,7 +73,7 @@
     <script>
         $(document).ready(function () {
             $('.allButTheFirst').on('change', function () {
-               if ($(this).is(':checked')) 
+               if ($(this).is(':checked'))
 
                  $('#thereCanOnlyBeOne').closest('label').removeClass('active');
             });
@@ -89,7 +89,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                 <h3>Refine Your Search</h3>
-               <form class="navbar-form" id='searchForm'>      
+               <form class="navbar-form" id='searchForm'>
                     <div align='center' class="btn-group" data-toggle="buttons">
                         <label class="btn btn-success active" style='center'>
                         <input name='searchParams' value='parks,hotels,petstore,vet' type="checkbox" id='thereCanOnlyBeOne' checked> Everything
@@ -114,14 +114,14 @@
                         <button type="submit" class="btn btn-lg btn-dark" id='checkBtn'>WOOF!</button>
                     </div>
             </form>
-            </div>  
+            </div>
         </div>
-    </aside>  
+    </aside>
 
     <!-- Map -->
     <section>
 
-         <script> 
+         <script>
 
         </script>
 
@@ -136,7 +136,7 @@
                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
                     maxZoom: 18
                 }).addTo(map);
-                map.scrollWheelZoom.disable(); 
+                map.scrollWheelZoom.disable();
                 $(function() {
                     $('#searchForm').on('submit', function(event) {
                         event.preventDefault();
@@ -148,20 +148,20 @@
                         }).done(function(response) {
                             // $('#map').empty();
                             var businessData = response.results.businesses;
-                            
+
                             for (var i=0; i < businessData.length; i++) {
                                 if (!businessData[i].phone) {
                                     console.log(businessData[i].phone);
-                                    businessData[i].phone = 'Phone Number Unavailable!' } else 
+                                    businessData[i].phone = 'Phone Number Unavailable!' } else
                                     {businessData[i].phone = businessData[i].phone}
                                 // console.log(businessData[i]);
                                 var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
                                 L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
-                            } 
+                            }
                             map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
                         });
                     })
-                })                 
+                })
                 // for (var i=0; i < businessData.length; i++) {
                 //     if (!businessData[i].phone) {
                 //         console.log(businessData[i].phone);
@@ -196,7 +196,7 @@
                         </li>
                     </ul>
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; DogScore 2014</p>
+                    <p class="text-muted">Copyright &copy; DogScore 2015</p>
                 </div>
             </div>
         </div>
