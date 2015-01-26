@@ -5,9 +5,9 @@ var request = require('request');
 require('./db')
 var yelp = require("yelp").createClient({
 	consumer_key: process.env.WOOF_KEY,
-  	consumer_secret: process.env.WOOF_SECRET,
-  	token: process.env.WOOF_TOKEN,
-  	token_secret: process.env.WOOF_TOKEN_SECRET});
+	consumer_secret: process.env.WOOF_SECRET,
+	token: process.env.WOOF_TOKEN,
+	token_secret: process.env.WOOF_TOKEN_SECRET});
 
 var async = require('async');
 app.set('view engine', 'ejs');
@@ -17,13 +17,18 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 
 // Where the search occurs
-app.get('/', function(req, res) { 
+app.get('/', function(req, res) {
 	var allYelpResults = []
-	var searchTerms = (req.query.searchParams && req.query.searchParams.constructor === String ) ?  new Array(req.query.searchParams) : req.query.searchParams;
+	console.log("all the params", req.query.searchParams )
+	var searchTerms = (req.query.searchParams && req.query.searchParams.constructor === String ) ?  req.query.searchParams.split(",") : req.query.searchParams;
 	searchTerms = searchTerms || ['dog_parks']
+	// searchTerms = searchTerms.split(",");
 
-	async.each(searchTerms, function(searchTerm, callback) {
+ 		// console.log("ALL MY TERMS", searchTerms[0]);
+
+ 		async.each(searchTerms, function(searchTerm, callback) {
 		//Do this for each searchTerm
+		console.log("IM SEARCHING FOR", searchTerm);
 		var location = "";
 		if (req.query.location === undefined) {
 			location = "Seattle, WA";
@@ -36,6 +41,7 @@ app.get('/', function(req, res) {
 		});
 	}, function(err) {
 		var results = {total:0, businesses:[], region:{}};
+		console.log("amount of yelp queries made", allYelpResults.length)
 		for (var i=0; i < allYelpResults.length; i++) {
 			results.region = allYelpResults[i].region
 			results.total += allYelpResults[i].total;
@@ -44,12 +50,12 @@ app.get('/', function(req, res) {
 		if(req.query.json && req.query.json=='true'){
 			res.send({results:results});
 		} else {
-			res.render('index', {allYelpResults: {results:results} })	
-		}		
+			res.render('index', {allYelpResults: {results:results} })
+		}
 	})
-})
-		
+ 	})
+
 //listening....
 app.listen(app.get('port' || 3000), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
+	console.log("Node app is running at localhost:" + app.get('port'))
 })

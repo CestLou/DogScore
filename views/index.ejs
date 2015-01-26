@@ -76,10 +76,12 @@
                if ($(this).is(':checked'))
 
                  $('#thereCanOnlyBeOne').closest('label').removeClass('active');
+                 $('#thereCanOnlyBeOne').attr('checked', false);
             });
             $('#thereCanOnlyBeOne').on('change', function () {
                if ($(this).is(':checked'))
                  $('.allButTheFirst').closest('label').removeClass('active');
+                 $('.allButTheFirst').attr('checked', false);
             });
         })
     </script>
@@ -101,7 +103,7 @@
                         <input name='searchParams' value='petstore' type="checkbox" class='allButTheFirst'> Pet Stores
                         </label>
                         <label class="btn btn-success">
-                        <input name='searchParams' value='dog_parks,parks' type="checkbox" class='allButTheFirst'> Parks
+                        <input name='searchParams' value='dog_parks' type="checkbox" class='allButTheFirst'> Parks
                         </label>
                         <label class="btn btn-success">
                         <input name='searchParams' value='vet' type="checkbox" class='allButTheFirst'> Vets
@@ -137,6 +139,7 @@
                     maxZoom: 18
                 }).addTo(map);
                 map.scrollWheelZoom.disable();
+                var markers = new L.FeatureGroup();
                 $(function() {
                     $('#searchForm').on('submit', function(event) {
                         event.preventDefault();
@@ -146,8 +149,12 @@
                             url: '/?json=true',
                             data: formData
                         }).done(function(response) {
-                            // $('#map').empty();
+
+                            map.removeLayer(markers);
+                            markers = new L.FeatureGroup();
+
                             var businessData = response.results.businesses;
+
 
                             for (var i=0; i < businessData.length; i++) {
                                 if (!businessData[i].phone) {
@@ -156,8 +163,11 @@
                                     {businessData[i].phone = businessData[i].phone}
                                 // console.log(businessData[i]);
                                 var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
-                                L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
+                                var marker = L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
+
+                                markers.addLayer(marker);
                             }
+                            map.addLayer(markers);
                             map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
                         });
                     })
@@ -220,7 +230,7 @@
     // Opens the sidebar menu
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
+        $("#sidebar-wrapper ").toggleClass("active");
     });
 
     // Scrolls to the selected menu item on the page
