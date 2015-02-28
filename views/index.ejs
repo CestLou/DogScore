@@ -32,6 +32,12 @@
 
     <!-- Font -->
     <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -85,6 +91,7 @@
             });
         })
     </script>
+
     <!-- Checkboxes/Buttons for search -->
     <aside class="call-to-action bg-primary" id='call-to-action'>
         <div class="container">
@@ -115,18 +122,13 @@
                         <br />
                         <button type="submit" class="btn btn-lg btn-dark" id='checkBtn'>WOOF!</button>
                     </div>
-            </form>
+                </form>
             </div>
         </div>
     </aside>
 
     <!-- Map -->
     <section>
-
-         <script>
-
-        </script>
-
         <div style="height:500px;" id="map" class="dark"></div>
         <script>
                 var businessData= <%- JSON.stringify(allYelpResults.results.businesses) %>;
@@ -161,27 +163,16 @@
                                     console.log(businessData[i].phone);
                                     businessData[i].phone = 'Phone Number Unavailable!' } else
                                     {businessData[i].phone = businessData[i].phone}
-                                // console.log(businessData[i]);
                                 var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
                                 var marker = L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).bindPopup(businessData[i].name + '<br>' +businessData[i].phone  + '<br>' + imgLink + '<br>' + businessData[i].snippet_text);
 
                                 markers.addLayer(marker);
                             }
                             map.addLayer(markers);
-                            map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
+                            // map.panTo([businessData[0].location.coordinate.latitude, businessData[0].location.coordinate.longitude]);
                         });
                     })
                 })
-                // for (var i=0; i < businessData.length; i++) {
-                //     if (!businessData[i].phone) {
-                //         console.log(businessData[i].phone);
-                //         businessData[i].phone = 'Phone Number Unavailable!'
-                //     };
-                    // console.log(typeof businessData[i].phone);
-
-                    // var imgLink = "<a href='" + businessData[i].url + "'>" + businessData[i].url + "</a>";
-                    // L.marker([businessData[i].location.coordinate.latitude, businessData[i].location.coordinate.longitude]).addTo(map).bindPopup('Name: ' + businessData[i].name + '<br>' + 'Telephone: ' +businessData[i].phone  + '<br>' + 'Yelp Page: ' + imgLink + '<br>' + businessData[i].snippet_text);
-                // }
         </script>
     </section>
 
@@ -212,43 +203,38 @@
         </div>
     </footer>
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
+    <!-- JavaScript for theme -->
     <script>
-
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper ").toggleClass("active");
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
+        // Closes the sidebar menu
+        $("#menu-close").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper").toggleClass("active");
         });
-    });
+
+        // Opens the sidebar menu
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#sidebar-wrapper ").toggleClass("active");
+        });
+
+        // Scrolls to the selected menu item on the page
+        $(function() {
+            $('a[href*=#]:not([href=#])').click(function() {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html,body').animate({
+                            scrollTop: target.offset().top
+                        }, 1000);
+                        return false;
+                    }
+                }
+            });
+        });
     </script>
+
 </body>
 </html>
